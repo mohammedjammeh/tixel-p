@@ -19,7 +19,6 @@ class OrderFactory extends Factory
     {
         return [
             'status' => collect(OrderStatus::cases())->random(),
-            'takeaway_id' => $this->faker->randomDigit(),
         ];
     }
 }

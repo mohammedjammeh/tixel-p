@@ -29,7 +29,7 @@ class OrderController extends Controller
     {
         $order->update($request->validated());
 
-        app(TakeawayInterface::class)->update($order->takeaway_id, $request->validated());
+        app(TakeawayInterface::class)->updateOrder($order->id, $request->validated());
 
         return ['order' => $order->refresh()];
     }

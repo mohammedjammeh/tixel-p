@@ -13,7 +13,6 @@ class Order extends Model
 
     protected $fillable = [
         'status',
-        'takeaway_id'
     ];
 
     protected $casts = [

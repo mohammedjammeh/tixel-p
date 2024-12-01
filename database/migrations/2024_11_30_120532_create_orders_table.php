@@ -17,7 +17,6 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) use ($statuses) {
             $table->id();
             $table->enum('status', $statuses)->default(OrderStatus::NEW->value)->index();
-            $table->unsignedInteger('takeaway_id');
             $table->timestamps();
         });
     }
