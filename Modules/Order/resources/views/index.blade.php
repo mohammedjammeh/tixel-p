@@ -27,19 +27,19 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     {{-- Vite CSS --}}
-     {{ module_vite('build-order', 'resources/assets/sass//pp.scss', storage_path('vite.hot')) }}
+{{--     {{ module_vite('build-order', 'resources/assets/sass//pp.scss', storage_path('vite.hot')) }}--}}
 {{--    {{ module_vite('build-order', 'resources/assets/css/app.css') }}--}}
 
 </head>
 
 <body>
 {{--<h1>Hello World</h1>--}}
-{{--<div id="app"></div>--}}
+<div id="app"></div>
 
 {{-- Vite JS --}}
 {{-- {{ module_vite('build-order', 'resources/assets/js/app.js', storage_path('vite.hot')) }}--}}
 {{--{{ module_vite('build-order', 'resources/assets/js/app.js') }}--}}
 
-{{--@vite('resources/js/app.js');--}}
-@vite(\Nwidart\Modules\Module::getAssets());
+@vite('resources/js/app.js');
+{{--@vite(\Nwidart\Modules\Module::getAssets());--}}
 </body>
