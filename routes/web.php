@@ -10,6 +10,6 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('welcome');
 });
-
-Route::resource('orders', OrderController::class)
-    ->only(['index', 'update']);
+//
+//Route::resource('orders', OrderController::class)
+//    ->only(['index', 'update']);
