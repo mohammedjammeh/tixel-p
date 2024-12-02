@@ -1,10 +1,8 @@
 <template>
-    <h1>hello hello!</h1>
-
     <nav>
         <div>
-            <router-link to="/">Home</router-link>
-            <router-link to="/about">About</router-link>
+<!--            <router-link to="/">Home</router-link>-->
+<!--            <router-link to="/about">About</router-link>-->
         </div>
     </nav>
 

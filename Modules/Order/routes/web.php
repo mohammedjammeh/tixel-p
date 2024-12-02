@@ -15,7 +15,7 @@ use Modules\Order\Http\Controllers\OrderController;
 */
 
 Route::group([], function () {
-    Route::get('/home', function () {
+    Route::get('/', function () {
         return view('order::index');
     });
 
