@@ -15,10 +15,10 @@ use Modules\Order\Http\Controllers\OrderController;
 */
 
 Route::group([], function () {
-    Route::resource('order', OrderController::class)->names('order');
-
-
     Route::get('/home', function () {
         return view('order::index');
     });
+
+    Route::resource('orders', OrderController::class)
+        ->only(['index', 'update']);
 });

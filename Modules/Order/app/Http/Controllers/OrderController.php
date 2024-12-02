@@ -3,63 +3,35 @@
 namespace Modules\Order\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Order\UpdateOrderRequest;
+use Modules\Order\Models\Order;
+use App\Wrappers\Contracts\TakeawayInterface;
 
 class OrderController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Gets list of orders.
+     *
+     * @return array<string, string>
      */
-    public function index()
+    public function index(): array
     {
-        return view('order::index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('order::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     */
-    public function show($id)
-    {
-        return view('order::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-        return view('order::edit');
+        return [
+            'orders' => Order::orderByDesc('created_at')->get(),
+        ];
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @return array<string, string>
      */
-    public function update(Request $request, $id)
+    public function update(UpdateOrderRequest $request, Order $order): array
     {
-        //
-    }
+        $order->update($request->validated());
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
-    {
-        //
+        app(TakeawayInterface::class)->updateOrder($order->id, $request->validated());
+
+        return ['order' => $order->refresh()];
     }
 }

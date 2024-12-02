@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Unit\Controllers;
+namespace Modules\Order\Tests\Unit;
 
 use App\Enums\OrderStatus;
-use App\Models\Order;
+use Modules\Order\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;

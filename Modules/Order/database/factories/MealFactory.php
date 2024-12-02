@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Factories;
+namespace Modules\Order\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Meal>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Modules\Order\Models\Meal>
  */
 class MealFactory extends Factory
 {

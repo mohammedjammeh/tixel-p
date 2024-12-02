@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Modules\Order\Models;
 
 use App\Enums\OrderStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,5 +22,15 @@ class Order extends Model
     public function meals(): BelongsToMany
     {
         return $this->belongsToMany(Meal::class)->using(OrderMeal::class);
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory()
+    {
+        return \Modules\Order\Database\Factories\OrderFactory::new();
     }
 }

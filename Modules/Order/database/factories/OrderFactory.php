@@ -1,19 +1,20 @@
 <?php
 
-namespace Database\Factories;
+namespace Modules\Order\Database\Factories;
 
 use App\Enums\OrderStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Order>
- */
 class OrderFactory extends Factory
 {
     /**
+     * The name of the factory's corresponding model.
+     */
+    protected $model = \Modules\Order\Models\Order::class;
+
+    /**
      * Define the model's default state.
-     *
-     * @return array<string, mixed>
      */
     public function definition(): array
     {
@@ -22,3 +23,4 @@ class OrderFactory extends Factory
         ];
     }
 }
+
