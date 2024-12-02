@@ -6,22 +6,22 @@ import order from '../components/Order.vue';
 import notFound from '../components/NotFound.vue';
 
 const routes = [
-    {
-        path: '/',
-        component: home
-    },
-    {
-        path: '/about',
-        component: about
-    },
-    {
-        path: '/order',
-        component: order
-    },
-    {
-        path: '/:pathMatch(.*)*',
-        component: notFound
-    }
+    // {
+    //     path: '/',
+    //     component: home
+    // },
+    // {
+    //     path: '/about',
+    //     component: about
+    // },
+    // {
+    //     path: '/order',
+    //     component: order
+    // },
+    // {
+    //     path: '/:pathMatch(.*)*',
+    //     component: notFound
+    // }ha
 ];
 
 const router = createRouter({
