@@ -13,6 +13,7 @@ export default defineConfig({
             publicDirectory: '../../public',
             buildDirectory: 'build-order',
             input: [
+                __dirname + '/resources/assets/css/app.css',
                 __dirname + '/resources/assets/sass/app.scss',
                 __dirname + '/resources/assets/js/app.js'
             ],

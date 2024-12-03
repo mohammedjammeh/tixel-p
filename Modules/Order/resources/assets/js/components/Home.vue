@@ -1,5 +1,5 @@
 <template>
-    <h1>Hey</h1>
+    <h1 class="bg-purple-700">hello</h1>
 </template>
 
 <script setup>
@@ -15,3 +15,9 @@
             });
     });
 </script>
+
+<style>
+    .hello {
+        background: green;
+    }
+</style>
