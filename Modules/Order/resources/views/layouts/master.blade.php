@@ -32,5 +32,5 @@
 
     {{-- Vite JS --}}
 {{--     {{ module_vite('build-order', 'resources/assets/js/app.js', storage_path('vite.hot')) }}--}}
-    @vite('resources/assets/js/app.js');
+    @vite('resources/assets/js/app.js')
 </body>
