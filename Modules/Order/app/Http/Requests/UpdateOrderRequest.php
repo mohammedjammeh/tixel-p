@@ -26,7 +26,7 @@ class UpdateOrderRequest extends FormRequest
         $statuses = collect(OrderStatus::cases())->pluck('value');
 
         return [
-            'status' => ['required', Rule::in($statuses)]
+            'status' => ['required', Rule::in($statuses)],
         ];
     }
 }

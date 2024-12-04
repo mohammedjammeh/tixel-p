@@ -22,4 +22,3 @@ class OrderFactory extends Factory
         ];
     }
 }
-
