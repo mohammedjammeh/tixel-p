@@ -3,7 +3,7 @@
 namespace Modules\Order\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Modules\Order\Http\Requests\Order\UpdateOrderRequest;
+use Modules\Order\Http\Requests\UpdateOrderRequest;
 use Modules\Order\Jobs\OrderStatusUpdated;
 use Modules\Order\Models\Order;
 use Modules\Order\Wrappers\Contracts\MainAppInterface;
