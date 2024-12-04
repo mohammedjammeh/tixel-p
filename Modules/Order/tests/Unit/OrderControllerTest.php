@@ -3,6 +3,8 @@
 namespace Modules\Order\Tests\Unit;
 
 use App\Enums\OrderStatus;
+use Illuminate\Support\Facades\Queue;
+use Modules\Order\Jobs\OrderStatusUpdated;
 use Modules\Order\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -58,6 +60,8 @@ class OrderControllerTest extends TestCase
 
     public function test_update_method_updates_order(): void
     {
+        Queue::fake();
+
         $order = Order::factory()->create(['status' => OrderStatus::NEW]);
 
         $this->patch(
@@ -71,8 +75,27 @@ class OrderControllerTest extends TestCase
         );
     }
 
+    public function test_update_method_dispatches_order_status_updated_job(): void
+    {
+        Queue::fake();
+
+        $order = Order::factory()->create(['status' => OrderStatus::NEW]);
+
+        $this->patch(
+            route('orders.update', ['order' => $order->id]),
+            ['status' => OrderStatus::PREPARING->value]
+        );
+
+        Queue::assertPushed(function (OrderStatusUpdated $job) use ($order) {
+            return $job->orderId === $order->id &&
+                $job->data === ['status' => OrderStatus::PREPARING->value];
+        });
+    }
+
     public function test_update_method_returns_updated_order(): void
     {
+        Queue::fake();
+
         $order = Order::factory()->create(['status' => OrderStatus::NEW]);
 
         $response = $this->patch(

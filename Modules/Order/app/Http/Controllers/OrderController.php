@@ -4,6 +4,7 @@ namespace Modules\Order\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\UpdateOrderRequest;
+use Modules\Order\Jobs\OrderStatusUpdated;
 use Modules\Order\Models\Order;
 use App\Wrappers\Contracts\TakeawayInterface;
 
@@ -28,9 +29,13 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $order): array
     {
-        $order->update($request->validated());
+        $validated = $request->validated();
 
-        app(TakeawayInterface::class)->updateOrder($order->id, $request->validated());
+        $order->update($validated);
+
+        OrderStatusUpdated::dispatch($order->id, $validated);
+
+        app(TakeawayInterface::class)->updateOrder($order->id, $validated);
 
         return ['order' => $order->refresh()];
     }

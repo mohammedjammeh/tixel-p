@@ -26,5 +26,8 @@
         "psr-4": {
             "Modules\\Order\\Tests\\": "tests/"
         }
+    },
+    "require": {
+        "vladimir-yuldashev/laravel-queue-rabbitmq": "^14.1"
     }
 }
