@@ -3,16 +3,15 @@
 namespace Modules\Order\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\Order\Models\Order;
 
-class OrderDatabaseSeeder extends Seeder
+class OrderSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-         $this->call([
-             OrderSeeder::class,
-         ]);
+        Order::factory()->count(25)->create();
     }
 }
