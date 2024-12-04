@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Order\Tests\Unit;
+namespace Modules\Order\Tests\Feature;
 
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;

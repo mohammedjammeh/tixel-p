@@ -35,7 +35,7 @@ class OrderController extends Controller
 
         OrderStatusUpdated::dispatch($order->id, $validated);
 
-        app(MainAppInterface::class)->updateOrder($order->id, $validated);
+//        app(MainAppInterface::class)->updateOrder($order->id, $validated);
 
         return ['order' => $order->refresh()];
     }
