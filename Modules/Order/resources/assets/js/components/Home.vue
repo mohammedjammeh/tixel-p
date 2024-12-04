@@ -1,5 +1,5 @@
 <template>
-    <h1 class="bg-purple-700">hello</h1>
+    <h1 class="bg-yellow-200">Hey</h1>
 </template>
 
 <script setup>

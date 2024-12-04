@@ -18,8 +18,10 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     {{-- Vite CSS --}}
-    {{ module_vite('build-order', 'resources/assets/css/app.css', storage_path('vite.hot')) }}
-    {{ module_vite('build-order', 'resources/assets/sass/app.scss', storage_path('vite.hot')) }}
+{{--    {{ module_vite('build-order', 'resources/assets/css/app.css', storage_path('vite.hot')) }}--}}
+{{--    {{ module_vite('build-order', 'resources/assets/sass/app.scss', storage_path('vite.hot')) }}--}}
+    @vite('resources/assets/css/app.css')
+    @vite('resources/assets/sass/app.scss')
 </head>
 
 <body>
@@ -29,5 +31,6 @@
     </div>
 
     {{-- Vite JS --}}
-     {{ module_vite('build-order', 'resources/assets/js/app.js', storage_path('vite.hot')) }}
+{{--     {{ module_vite('build-order', 'resources/assets/js/app.js', storage_path('vite.hot')) }}--}}
+    @vite('resources/assets/js/app.js');
 </body>
