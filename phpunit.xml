@@ -28,6 +28,7 @@
             <directory suffix=".php">./Modules/*/resources</directory>
             <directory suffix=".php">./Modules/*/routes</directory>
             <directory suffix=".php">./Modules/*/tests</directory>
+            <directory suffix=".php">./Modules/*/vendor</directory>
         </exclude>
     </source>
     <php>
