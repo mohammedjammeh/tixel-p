@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Wrappers\Contracts\TakeawayInterface;
-use App\Wrappers\TakeawayAPI;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +11,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(TakeawayInterface::class, TakeawayAPI::class);
     }
 
     /**

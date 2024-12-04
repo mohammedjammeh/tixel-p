@@ -2,13 +2,13 @@
 
 namespace Modules\Order\Tests\Unit;
 
-use App\Enums\OrderStatus;
-use Illuminate\Support\Facades\Queue;
-use Modules\Order\Jobs\OrderStatusUpdated;
-use Modules\Order\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Queue;
+use Modules\Order\Enums\OrderStatus;
+use Modules\Order\Jobs\OrderStatusUpdated;
+use Modules\Order\Models\Order;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Order;
+namespace Modules\Order\Http\Requests\Order;
 
-use App\Enums\OrderStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Modules\Order\Enums\OrderStatus;
 
 class UpdateOrderRequest extends FormRequest
 {

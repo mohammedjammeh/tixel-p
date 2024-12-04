@@ -3,10 +3,10 @@
 namespace Modules\Order\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Order\UpdateOrderRequest;
+use Modules\Order\Http\Requests\Order\UpdateOrderRequest;
 use Modules\Order\Jobs\OrderStatusUpdated;
 use Modules\Order\Models\Order;
-use App\Wrappers\Contracts\TakeawayInterface;
+use Modules\Order\Wrappers\Contracts\MainAppInterface;
 
 class OrderController extends Controller
 {
@@ -35,7 +35,7 @@ class OrderController extends Controller
 
         OrderStatusUpdated::dispatch($order->id, $validated);
 
-        app(TakeawayInterface::class)->updateOrder($order->id, $validated);
+        app(MainAppInterface::class)->updateOrder($order->id, $validated);
 
         return ['order' => $order->refresh()];
     }

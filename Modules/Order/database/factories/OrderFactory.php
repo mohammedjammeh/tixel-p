@@ -2,9 +2,8 @@
 
 namespace Modules\Order\Database\Factories;
 
-use App\Enums\OrderStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Order\Enums\OrderStatus;
 
 class OrderFactory extends Factory
 {

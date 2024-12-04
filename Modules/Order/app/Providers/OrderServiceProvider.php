@@ -4,6 +4,8 @@ namespace Modules\Order\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Modules\Order\Wrappers\Contracts\MainAppInterface;
+use Modules\Order\Wrappers\MainAppAPI;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -27,10 +29,6 @@ class OrderServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
-
-        $this->commands([
-            \Modules\Order\Console\CreatePostCommand::class,
-        ]);
     }
 
     /**
@@ -40,6 +38,8 @@ class OrderServiceProvider extends ServiceProvider
     {
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+
+        $this->app->bind(MainAppInterface::class, MainAppAPI::class);
     }
 
     /**

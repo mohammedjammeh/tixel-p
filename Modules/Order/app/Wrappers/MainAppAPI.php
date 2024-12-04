@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Wrappers;
+namespace Modules\Order\Wrappers;
 
 
-use App\Wrappers\Contracts\TakeawayInterface;
 use Illuminate\Http\JsonResponse;
+use Modules\Order\Wrappers\Contracts\MainAppInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-class TakeawayAPI implements TakeawayInterface
+class MainAppAPI implements MainAppInterface
 {
     public function __construct()
     {
