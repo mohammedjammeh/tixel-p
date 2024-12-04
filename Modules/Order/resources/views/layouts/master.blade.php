@@ -7,7 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Order Module - {{ config('app.name', 'Laravel') }}</title>
+{{--    <title>{{ config('app.name', 'Laravel') }}</title>--}}
+    <title>tixel p</title>
 
     <meta name="description" content="{{ $description ?? '' }}">
     <meta name="keywords" content="{{ $keywords ?? '' }}">
@@ -24,11 +25,18 @@
     @vite('resources/assets/sass/app.scss')
 </head>
 
-<body>
+<body class="m-auto max-w-5xl">
+    <header class="text-center m-5">
+        <h1>tixel p</h1>
+    </header>
 
     <div id="app">
         @yield('content')
     </div>
+
+    <section>
+        <p class="text-center m-5">&copy; 2024 tixel p</p>
+    </section>
 
     {{-- Vite JS --}}
 {{--     {{ module_vite('build-order', 'resources/assets/js/app.js', storage_path('vite.hot')) }}--}}
