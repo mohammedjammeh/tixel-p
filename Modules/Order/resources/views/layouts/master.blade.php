@@ -23,6 +23,8 @@
 {{--    {{ module_vite('build-order', 'resources/assets/sass/app.scss', storage_path('vite.hot')) }}--}}
     @vite('resources/assets/css/app.css')
     @vite('resources/assets/sass/app.scss')
+
+    <script src="https://kit.fontawesome.com/b1d79f2ea5.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="bg-slate-100">
