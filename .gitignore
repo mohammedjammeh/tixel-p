@@ -22,3 +22,4 @@ yarn-error.log
 /.vscode
 /.zed
 /Modules/Order/vendor
+/Modules/Order/node_modules
