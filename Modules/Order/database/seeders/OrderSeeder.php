@@ -19,38 +19,38 @@ class OrderSeeder extends Seeder
             ->count(8)
             ->state(new Sequence(
                 [
-                    'status' => OrderStatus::READY,
+//                    'status' => OrderStatus::READY,
                     'created_at' => Carbon::now()->subMinutes(40)
                 ],
                 [
-                    'status' => OrderStatus::READY,
+//                    'status' => OrderStatus::READY,
                     'created_at' => Carbon::now()->subMinutes(35)
                 ],
                 [
-                    'status' => OrderStatus::COOK,
+//                    'status' => OrderStatus::COOK,
                     'created_at' => Carbon::now()->subMinutes(30)
                 ],
                 [
-                    'status' => OrderStatus::COOK,
+//                    'status' => OrderStatus::COOK,
                     'created_at' => Carbon::now()->subMinutes(25)
                 ],
                 [
-                    'status' => OrderStatus::PREPARE,
+//                    'status' => OrderStatus::PREPARE,
                     'created_at' => Carbon::now()->subMinutes(20)
                 ],
                 [
-                    'status' => OrderStatus::PREPARE,
+//                    'status' => OrderStatus::PREPARE,
                     'created_at' => Carbon::now()->subMinutes(15)
                 ],
                 [
-                    'status' => OrderStatus::NEW,
+//                    'status' => OrderStatus::NEW,
                     'created_at' => Carbon::now()->subMinutes(10)
                 ],
                 [
-                    'status' => OrderStatus::NEW,
+//                    'status' => OrderStatus::NEW,
                     'created_at' => Carbon::now()->subMinutes(5)
                 ],
             ))
-            ->create();
+            ->create(['status' => OrderStatus::NEW]);
     }
 }

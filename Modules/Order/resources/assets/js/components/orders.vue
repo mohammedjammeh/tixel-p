@@ -1,9 +1,9 @@
 <template>
     <div class="rounded-xl bg-white">
         <div class="mx-14 py-2.5 border-b border-slate-100 last:border-b-0 last:pb-8" v-for="order in orders">
-            <div class="flex my-4 mx-2.5">
+            <div class="flex my-4 mx-2.5 min-h-[40px]">
                 <div class="flex-1">
-                    <p class="mt-1" v-text="'Order #' + order.id"></p>
+                    <p class="mt-1.5" v-text="'Order #' + order.id"></p>
                 </div>
 
                 <div class="flex-2" v-if="isNotReady(order)">
@@ -15,22 +15,36 @@
                     </button>
                 </div>
             </div>
-            <div class="flex mt-6 mb-4 ml-5 mr-8">
-                <div class="flex-1">
-                    <p class="mb-2 ml-1" :class="getElementColour(order.status, 'new')">new</p>
-                    <i class="fa-solid fa-cart-shopping fa-2x"  :class="getElementColour(order.status, 'new')"></i>
-                </div>
-                <div class="flex-1">
-                    <p class="text-gray-200 mb-2" :class="getElementColour(order.status, 'prepare')">prepare</p>
-                    <i class="fa-solid fa-kitchen-set fa-2x text-gray-200 ml-2.5" :class="getElementColour(order.status, 'prepare')"></i>
-                </div>
-                <div class="flex-1">
-                    <p class="text-gray-200 mb-2 ml-0.5" :class="getElementColour(order.status, 'cook')">cook</p>
-                    <i class="fa-solid fa-fire-burner fa-2x text-gray-200" :class="getElementColour(order.status, 'cook')"></i>
-                </div>
-                <div class="flex-2">
-                    <p class="text-gray-200 mb-2" :class="getElementColour(order.status, 'ready')">ready</p>
-                    <i class="fa-solid fa-truck-fast fa-2x text-gray-200" :class="getElementColour(order.status, 'ready')"></i>
+            <div class="flex mb-4 ml-5 mr-8">
+                <div
+                    class="[&:nth-child(1)]:flex-1 [&:nth-child(2)]:flex-1 [&:nth-child(3)]:flex-1"
+                    v-for="status in statuses"
+                >
+                    <i
+                        class="fa-circle-check text-blue-800"
+                        :class="[
+                            isOrderHigher(order.status, status) ? 'fa-solid' : 'fa-regular',
+                            statusElementClasses[status]['check']
+                        ]"
+                    >
+                    </i>
+                    <p
+                        class="text-gray-200 mb-2"
+                        :class="[
+                            isOrderHigher(order.status, status) ? 'text-blue-800' : 'text-gray-200',
+                            statusElementClasses[status]['text']
+                        ]"
+                    >
+                        {{ status }}
+                    </p>
+                    <i
+                        class="fa-solid fa-2x"
+                        :class="[
+                            isOrderHigher(order.status, status) ? 'text-blue-800' : 'text-gray-200',
+                            statusElementClasses[status]['icon']
+                        ]"
+                    >
+                    </i>
                 </div>
             </div>
         </div>
@@ -44,6 +58,28 @@
 
     let orders = ref([]);
     let statuses = ref([]);
+    let statusElementClasses = {
+        new: {
+            check: 'ml-2.5',
+            text: 'ml-1',
+            icon: 'fa-cart-shopping',
+        },
+        prepare: {
+            check: 'ml-5',
+            text: '',
+            icon: 'fa-kitchen-set ml-2.5',
+        },
+        cook: {
+            check: 'ml-2.5',
+            text: 'ml-0.5',
+            icon: 'fa-fire-burner',
+        },
+        ready: {
+            check: 'ml-2.5',
+            text: '',
+            icon: 'fa-truck-fast',
+        },
+    };
 
     onMounted(() => {
         ordersCore.getAll().then((data) => {
@@ -71,12 +107,11 @@
         return String(val).charAt(0).toUpperCase() + String(val).slice(1);
     }
 
-    const getElementColour = (orderStatus, elementStatus) => {
+    const isOrderHigher = (orderStatus, elementStatus) => {
         let ordersStatusIndex = statuses.value.indexOf(orderStatus);
         let elementStatusIndex = statuses.value.indexOf(elementStatus);
 
-        return ordersStatusIndex >= elementStatusIndex ? 'text-blue-800' : 'text-gray-200'
-
+        return ordersStatusIndex >= elementStatusIndex;
     }
 
     const isNotReady = (order) => order.status !== 'ready';

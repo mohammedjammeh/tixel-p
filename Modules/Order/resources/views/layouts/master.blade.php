@@ -7,7 +7,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-{{--    <title>{{ config('app.name', 'Laravel') }}</title>--}}
     <title>Pizza POS</title>
 
     <meta name="description" content="{{ $description ?? '' }}">
@@ -30,7 +29,7 @@
 <body class="bg-slate-100">
     <div class="m-auto max-w-4xl">
         <header class="mt-8 mb-7">
-            <h1 class="text-lg text-center"><a href="/">Pizza POS</a></h1>
+            <h1 class="text-lg text-center text-orange-800"><a href="/">Pizza POS</a></h1>
         </header>
 
         <section>
