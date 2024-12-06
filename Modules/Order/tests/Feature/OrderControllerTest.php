@@ -35,6 +35,22 @@ class OrderControllerTest extends TestCase
         );
     }
 
+    public function test_index_method_returns_list_of_order_statuses(): void
+    {
+        $response = $this->get(route('orders.index'));
+        $responseStatuses = $response->baseResponse->original['statuses'];
+
+        $this->assertEquals(
+            [
+                OrderStatus::NEW->value,
+                OrderStatus::PREPARE->value,
+                OrderStatus::COOK->value,
+                OrderStatus::READY->value,
+            ],
+            $responseStatuses,
+        );
+    }
+
     #[DataProvider('updateValidationDataProvider')]
     public function test_update_method_data_gets_validated($field, $value, $error): void
     {
@@ -66,11 +82,11 @@ class OrderControllerTest extends TestCase
 
         $this->patch(
             route('orders.update', ['order' => $order->id]),
-            ['status' => OrderStatus::PREPARING->value]
+            ['status' => OrderStatus::PREPARE->value]
         );
 
         $this->assertEquals(
-            OrderStatus::PREPARING,
+            OrderStatus::PREPARE,
             $order->refresh()->status,
         );
     }
@@ -83,12 +99,12 @@ class OrderControllerTest extends TestCase
 
         $this->patch(
             route('orders.update', ['order' => $order->id]),
-            ['status' => OrderStatus::PREPARING->value]
+            ['status' => OrderStatus::PREPARE->value]
         );
 
         Queue::assertPushed(function (OrderStatusUpdated $job) use ($order) {
             return $job->orderId === $order->id &&
-                $job->data === ['status' => OrderStatus::PREPARING->value];
+                $job->data === ['status' => OrderStatus::PREPARE->value];
         });
     }
 
@@ -100,7 +116,7 @@ class OrderControllerTest extends TestCase
 
         $response = $this->patch(
             route('orders.update', ['order' => $order->id]),
-            ['status' => OrderStatus::PREPARING->value]
+            ['status' => OrderStatus::PREPARE->value]
         );
         $responseOrder = $response->baseResponse->original['order'];
 

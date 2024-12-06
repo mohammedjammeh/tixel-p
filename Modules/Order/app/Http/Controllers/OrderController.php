@@ -3,10 +3,9 @@
 namespace Modules\Order\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Modules\Order\Enums\OrderStatus;
 use Modules\Order\Http\Requests\UpdateOrderRequest;
-use Modules\Order\Jobs\OrderStatusUpdated;
 use Modules\Order\Models\Order;
-use Modules\Order\Wrappers\Contracts\MainAppInterface;
 
 class OrderController extends Controller
 {
@@ -19,6 +18,7 @@ class OrderController extends Controller
     {
         return [
             'orders' => Order::orderByDesc('created_at')->get(),
+            'statuses' => collect(OrderStatus::cases())->pluck('value')->toArray(),
         ];
     }
 
@@ -29,13 +29,7 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $order): array
     {
-        $validated = $request->validated();
-
-        $order->update($validated);
-
-        OrderStatusUpdated::dispatch($order->id, $validated);
-
-//        app(MainAppInterface::class)->updateOrder($order->id, $validated);
+        $order->update($request->validated());
 
         return ['order' => $order->refresh()];
     }

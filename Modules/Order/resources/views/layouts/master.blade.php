@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 {{--    <title>{{ config('app.name', 'Laravel') }}</title>--}}
-    <title>tixel p</title>
+    <title>Pizza POS</title>
 
     <meta name="description" content="{{ $description ?? '' }}">
     <meta name="keywords" content="{{ $keywords ?? '' }}">
@@ -25,18 +25,18 @@
     @vite('resources/assets/sass/app.scss')
 </head>
 
-<body class="m-auto max-w-5xl">
-    <header class="text-center m-5">
-        <h1>tixel p</h1>
-    </header>
+<body class="bg-slate-100">
+    <div class="m-auto max-w-4xl">
+        <header class="mt-8 mb-7">
+            <h1 class="text-lg text-center"><a href="/">Pizza POS</a></h1>
+        </header>
 
-    <div id="app">
-        @yield('content')
+        <section>
+            <div id="app">
+                @yield('content')
+            </div>
+        </section>
     </div>
-
-    <section>
-        <p class="text-center m-5">&copy; 2024 tixel p</p>
-    </section>
 
     {{-- Vite JS --}}
 {{--     {{ module_vite('build-order', 'resources/assets/js/app.js', storage_path('vite.hot')) }}--}}
