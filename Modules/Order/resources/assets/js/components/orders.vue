@@ -3,15 +3,22 @@
         <div class="mx-14 py-2.5 border-b border-slate-100 last:border-b-0 last:pb-8" v-for="order in orders">
             <div class="flex my-4 mx-2.5 min-h-[40px]">
                 <div class="flex-1">
-                    <p class="mt-1.5" v-text="'Order #' + order.id"></p>
+                    <p v-text="`Order #${order.id}`"></p>
+                    <p class="text-gray-600 text-sm" v-text="order.meals_names"></p>
                 </div>
 
                 <div class="flex-2" v-if="isNotReady(order)">
                     <button
                         @click="updateOrder(order)"
-                        class="bg-sky-500 hover:bg-sky-600 pt-1 pb-1.5 px-5 min-w-24 rounded-3xl text-white transition ease-in-out delay-75"
+                        class="bg-sky-500 hover:bg-sky-600 pt-1 pb-1.5 mt-1 px-5 rounded-3xl text-white transition ease-in-out delay-75"
                     >
-                        {{ capitalizeFirstLetter(nextStatus(order)) }}
+                        <i
+                            class="fa-solid fa-1x text-gray-50 mr-0.5 mt-0.5 ml-0"
+                            :class="statusElementClasses[nextStatus(order)]['icon']"
+                        >
+                        </i>
+
+                        {{ (nextStatus(order)) }}
                     </button>
                 </div>
             </div>
@@ -20,27 +27,45 @@
                     class="[&:nth-child(1)]:flex-1 [&:nth-child(2)]:flex-1 [&:nth-child(3)]:flex-1"
                     v-for="status in statuses"
                 >
-                    <i
-                        class="fa-circle-check text-blue-800"
-                        :class="[
-                            isOrderHigher(order.status, status) ? 'fa-solid' : 'fa-regular',
-                            statusElementClasses[status]['check']
-                        ]"
-                    >
-                    </i>
+                    <div class="min-h-6">
+                        <!--loading-->
+                        <div
+                            v-if="nextStatus(order) === status"
+                            :class="[
+                                'loader ml-2 w-[18px] h-[18px] border-2 border-[#f3f3f3] border-t-2 border-t-[#3498db] rounded-[50%]',
+                                statusElementClasses[status]['loading']
+                            ]"
+                        >
+                        </div>
+
+                        <!--or display check(ed)-->
+                        <i
+                            v-else
+                            class="fa-circle-check"
+                            :class="[
+                                isOrderHigher(order.status, status) ? 'text-blue-900 fa-solid' : 'text-gray-200 fa-regular',
+                                statusElementClasses[status]['check']
+                            ]"
+                        >
+                        </i>
+                    </div>
+
+                    <!--status-->
                     <p
                         class="text-gray-200 mb-2"
                         :class="[
-                            isOrderHigher(order.status, status) ? 'text-blue-800' : 'text-gray-200',
+                            isOrderHigher(order.status, status) ? 'text-blue-900' : 'text-gray-200',
                             statusElementClasses[status]['text']
                         ]"
                     >
                         {{ status }}
                     </p>
+
+                    <!--icon-->
                     <i
-                        class="fa-solid fa-2x"
+                        class="fa-solid fa-2x text-center"
                         :class="[
-                            isOrderHigher(order.status, status) ? 'text-blue-800' : 'text-gray-200',
+                            isOrderHigher(order.status, status) ? 'text-blue-900' : 'text-gray-200',
                             statusElementClasses[status]['icon']
                         ]"
                     >
@@ -52,7 +77,7 @@
 </template>
 
 <script setup>
-    import { ref, computed, onMounted } from "vue";
+    import { ref, onMounted } from "vue";
     import ordersCore from '../core/orders.js';
     import request from '../classes/request.js';
 
@@ -60,22 +85,26 @@
     let statuses = ref([]);
     let statusElementClasses = {
         new: {
-            check: 'ml-2.5',
+            check: 'ml-3',
+            loading: '',
             text: 'ml-1',
             icon: 'fa-cart-shopping',
         },
-        prepare: {
-            check: 'ml-5',
+        prepared: {
+            check: 'ml-6',
+            loading: 'ml-5',
             text: '',
-            icon: 'fa-kitchen-set ml-2.5',
+            icon: 'fa-kitchen-set ml-3.5',
         },
-        cook: {
-            check: 'ml-2.5',
+        cooked: {
+            check: 'ml-5',
+            loading: 'ml-5',
             text: 'ml-0.5',
-            icon: 'fa-fire-burner',
+            icon: 'fa-fire-burner ml-2.5',
         },
         ready: {
             check: 'ml-2.5',
+            loading: '',
             text: '',
             icon: 'fa-truck-fast',
         },
@@ -103,8 +132,10 @@
         return statuses.value[orderStatusIndex + 1];
     }
 
-    const capitalizeFirstLetter = (val) => {
-        return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+    const isNotReady = (order) => order.status !== 'ready';
+
+    const getMealNames = (order) => {
+        return `Order #${order.id} - margherita, vegan`;
     }
 
     const isOrderHigher = (orderStatus, elementStatus) => {
@@ -113,12 +144,22 @@
 
         return ordersStatusIndex >= elementStatusIndex;
     }
-
-    const isNotReady = (order) => order.status !== 'ready';
 </script>
 
 <style>
-    .hello {
-        background: green;
+    .loader {
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
 </style>

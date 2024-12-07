@@ -24,7 +24,7 @@ class Order extends Model
 
     public function meals(): BelongsToMany
     {
-        return $this->belongsToMany(Meal::class)->using(OrderMeal::class);
+        return $this->belongsToMany(Meal::class, 'order_meal')->using(OrderMeal::class);
     }
 
     /**
@@ -35,5 +35,10 @@ class Order extends Model
     protected static function newFactory()
     {
         return \Modules\Order\Database\Factories\OrderFactory::new();
+    }
+
+    public function getMealsNamesAttribute(): string
+    {
+        return $this->meals->implode('name', ', ');
     }
 }

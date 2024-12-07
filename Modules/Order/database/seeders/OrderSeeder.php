@@ -18,38 +18,14 @@ class OrderSeeder extends Seeder
         Order::factory()
             ->count(8)
             ->state(new Sequence(
-                [
-//                    'status' => OrderStatus::READY,
-                    'created_at' => Carbon::now()->subMinutes(40)
-                ],
-                [
-//                    'status' => OrderStatus::READY,
-                    'created_at' => Carbon::now()->subMinutes(35)
-                ],
-                [
-//                    'status' => OrderStatus::COOK,
-                    'created_at' => Carbon::now()->subMinutes(30)
-                ],
-                [
-//                    'status' => OrderStatus::COOK,
-                    'created_at' => Carbon::now()->subMinutes(25)
-                ],
-                [
-//                    'status' => OrderStatus::PREPARE,
-                    'created_at' => Carbon::now()->subMinutes(20)
-                ],
-                [
-//                    'status' => OrderStatus::PREPARE,
-                    'created_at' => Carbon::now()->subMinutes(15)
-                ],
-                [
-//                    'status' => OrderStatus::NEW,
-                    'created_at' => Carbon::now()->subMinutes(10)
-                ],
-                [
-//                    'status' => OrderStatus::NEW,
-                    'created_at' => Carbon::now()->subMinutes(5)
-                ],
+                ['created_at' => Carbon::now()->subMinutes(40)],
+                ['created_at' => Carbon::now()->subMinutes(35)],
+                ['created_at' => Carbon::now()->subMinutes(30)],
+                ['created_at' => Carbon::now()->subMinutes(25)],
+                ['created_at' => Carbon::now()->subMinutes(20)],
+                ['created_at' => Carbon::now()->subMinutes(15)],
+                ['created_at' => Carbon::now()->subMinutes(10)],
+                ['created_at' => Carbon::now()->subMinutes(5)],
             ))
             ->create(['status' => OrderStatus::NEW]);
     }

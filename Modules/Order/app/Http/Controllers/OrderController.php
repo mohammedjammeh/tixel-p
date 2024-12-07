@@ -16,9 +16,18 @@ class OrderController extends Controller
      */
     public function index(): array
     {
+        $orders = Order::with(['meals'])
+            ->orderByDesc('created_at')
+            ->get()
+            ->append('meals_names');
+
+        $statuses = collect(OrderStatus::cases())
+            ->pluck('value')
+            ->toArray();
+
         return [
-            'orders' => Order::orderByDesc('created_at')->get(),
-            'statuses' => collect(OrderStatus::cases())->pluck('value')->toArray(),
+            'orders' => $orders,
+            'statuses' => $statuses,
         ];
     }
 
@@ -31,6 +40,8 @@ class OrderController extends Controller
     {
         $order->update($request->validated());
 
-        return ['order' => $order->refresh()];
+        $order = $order->refresh()->append('meals_names');
+
+        return ['order' => $order];
     }
 }

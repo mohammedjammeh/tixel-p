@@ -23,11 +23,11 @@ class OrderObserverTest extends TestCase
 
         $order = Order::factory()->create(['status' => OrderStatus::NEW]);
 
-        $order->update(['status' => OrderStatus::PREPARE]);
+        $order->update(['status' => OrderStatus::PREPARED]);
 
         Queue::assertPushed(function (OrderStatusUpdated $job) use ($order) {
             return $job->orderId === $order->id &&
-                $job->data === ['status' => OrderStatus::PREPARE->value];
+                $job->data === ['status' => OrderStatus::PREPARED->value];
         });
     }
 

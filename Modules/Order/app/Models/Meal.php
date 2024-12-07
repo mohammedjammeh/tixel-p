@@ -17,6 +17,16 @@ class Meal extends Model
 
     public function orders(): BelongsToMany
     {
-        return $this->belongsToMany(Order::class)->using(OrderMeal::class);
+        return $this->belongsToMany(Order::class, 'order_meal')->using(OrderMeal::class);
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory()
+    {
+        return \Modules\Order\Database\Factories\MealFactory::new();
     }
 }
