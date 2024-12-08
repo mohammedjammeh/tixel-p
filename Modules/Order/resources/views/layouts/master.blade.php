@@ -29,7 +29,7 @@
 <body class="bg-slate-100">
     <div class="m-auto max-w-4xl">
         <header class="mt-8 mb-7">
-            <h1 class="text-lg text-center text-orange-800"><a href="/">Pizza POS</a></h1>
+            <h1 class="text-lg text-center text-orange-800" data-test="heading"><a href="/">Pizza POS</a></h1>
         </header>
 
         <section>

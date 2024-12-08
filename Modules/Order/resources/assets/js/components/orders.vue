@@ -3,8 +3,8 @@
         <div class="mx-14 py-2.5 border-b border-slate-100 last:border-b-0 last:pb-8" v-for="order in orders">
             <div class="flex my-4 mx-2.5 min-h-[40px]">
                 <div class="flex-1">
-                    <p v-text="`Order #${order.id}`"></p>
-                    <p class="text-gray-600 text-sm" v-text="order.meals_names"></p>
+                    <p v-text="`Order #${order.id}`" data-test="order_name"></p>
+                    <p class="text-gray-600 text-sm" v-text="order.meals_names" data-test="meals_names"></p>
                 </div>
 
                 <div class="flex-2" v-if="isNotReady(order)">
@@ -22,6 +22,7 @@
                     </button>
                 </div>
             </div>
+
             <div class="flex mb-4 ml-5 mr-8">
                 <div
                     class="[&:nth-child(1)]:flex-1 [&:nth-child(2)]:flex-1 [&:nth-child(3)]:flex-1"
@@ -31,6 +32,7 @@
                         <!--loading-->
                         <div
                             v-if="nextStatus(order) === status"
+                            :data-test="`order_${order.id}_${status}_loader`"
                             :class="[
                                 'loader ml-2 w-[18px] h-[18px] border-2 border-[#f3f3f3] border-t-2 border-t-[#3498db] rounded-[50%]',
                                 statusElementClasses[status]['loading']
@@ -41,6 +43,7 @@
                         <!--or display check(ed)-->
                         <i
                             v-else
+                            :data-test="`order_${order.id}_${status}_check`"
                             class="fa-circle-check"
                             :class="[
                                 isOrderHigher(order.status, status) ? 'text-blue-900 fa-solid' : 'text-gray-200 fa-regular',
@@ -52,7 +55,8 @@
 
                     <!--status-->
                     <p
-                        class="text-gray-200 mb-2"
+                        :data-test="`order_${order.id}_${status}_status`"
+                        class="mb-2"
                         :class="[
                             isOrderHigher(order.status, status) ? 'text-blue-900' : 'text-gray-200',
                             statusElementClasses[status]['text']
@@ -63,6 +67,7 @@
 
                     <!--icon-->
                     <i
+                        :data-test="`order_${order.id}_${status}_icon`"
                         class="fa-solid fa-2x text-center"
                         :class="[
                             isOrderHigher(order.status, status) ? 'text-blue-900' : 'text-gray-200',
@@ -133,10 +138,6 @@
     }
 
     const isNotReady = (order) => order.status !== 'ready';
-
-    const getMealNames = (order) => {
-        return `Order #${order.id} - margherita, vegan`;
-    }
 
     const isOrderHigher = (orderStatus, elementStatus) => {
         let ordersStatusIndex = statuses.value.indexOf(orderStatus);
