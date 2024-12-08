@@ -11,7 +11,7 @@
                     <button
                         :data-test="`order_${order.id}_button`"
                         @click="updateOrder(order)"
-                        class="bg-sky-500 hover:bg-sky-600 pt-1 pb-1.5 mt-1 px-5 rounded-3xl text-white transition ease-in-out delay-75"
+                        class="bg-sky-500 hover:bg-sky-600 py-1.5 px-[18px] mt-1 rounded-3xl text-white transition ease-in-out delay-75"
                     >
                         <i
                             :data-test="`order_${order.id}_button_icon`"
@@ -120,7 +120,6 @@
     };
     const failedOrderIds = ref([]);
 
-
     onMounted(() => {
         ordersCore.getAll().then((data) => {
             orders.value = data.orders;
@@ -129,12 +128,14 @@
     });
 
     const updateOrder = (order) => {
-        ordersCore.update(order.id, new request({ status: nextStatus(order) }))
+        ordersCore
+            .update(order.id, new request({ status: nextStatus(order) }))
             .then((response) => {
                 let updatedOrder = response.order;
                 let updatedOrderIndex = orders.value.findIndex((order) => order.id === updatedOrder.id);
                 orders.value[updatedOrderIndex] = updatedOrder;
-            }).catch((error) => {
+            })
+            .catch((error) => {
                 failedOrderIds.value.push(order.id);
             });
     };
