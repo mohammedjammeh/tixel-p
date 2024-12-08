@@ -27,7 +27,7 @@ class OrderObserverTest extends TestCase
         });
     }
 
-    public function test_updating_other_attributes_does_not_dispatch_order_status_updated_job(): void
+    public function test_order_status_updated_job_does_not_get_dispatched_if_status_has_not_changed(): void
     {
         Queue::fake();
 

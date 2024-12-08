@@ -26,7 +26,7 @@
             </div>
 
             <div class="mx-2.5 mt-3 mb-4" v-if="failedOrderIds.includes(order.id)">
-                <p class="text-red-800">Sorry, there was an error. Please try again or contact your admin.</p>
+                <p class="text-red-800 text-sm">Sorry, there was an error. Please try again or contact your admin.</p>
             </div>
 
             <div class="flex my-4 ml-5 mr-8">
