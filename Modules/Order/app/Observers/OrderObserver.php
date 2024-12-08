@@ -17,6 +17,6 @@ class OrderObserver
 
         OrderStatusUpdated::dispatch($order->id, ['status' => $order->status->value]);
 
-        app(MainAppInterface::class)->updateOrder($order->id, ['status' => $order]);
+//        app(MainAppInterface::class)->updateOrder($order->id, ['status' => $order]);
     }
 }
