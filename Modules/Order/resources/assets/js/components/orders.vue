@@ -1,6 +1,6 @@
 <template>
-    <div class="rounded-xl bg-white">
-        <div class="mx-14 py-2.5 border-b border-slate-100 last:border-b-0 last:pb-8" v-for="order in orders">
+    <div class="rounded-xl bg-white m-4">
+        <div class="mx-4 md:mx-14 py-2.5 border-b border-slate-100 last:border-b-0 last:pb-8" v-for="order in orders">
             <div class="flex my-4 mx-2.5 min-h-[40px]">
                 <div class="flex-1">
                     <p v-text="`Order #${order.id}`" data-test="order_name"></p>
@@ -15,7 +15,7 @@
                     >
                         <i
                             :data-test="`order_${order.id}_button_icon`"
-                            class="fa-solid fa-1x text-gray-50 mr-0.5 mt-0.5 ml-0"
+                            class="fa-solid fa-1x text-gray-50 mr-0.5 mt-0.5 !ml-0"
                             :class="statusElementClasses[nextStatus(order)]['icon']"
                         >
                         </i>
