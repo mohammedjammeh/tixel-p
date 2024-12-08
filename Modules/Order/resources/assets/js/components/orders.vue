@@ -9,10 +9,12 @@
 
                 <div class="flex-2" v-if="isNotReady(order)">
                     <button
+                        :data-test="`order_${order.id}_button`"
                         @click="updateOrder(order)"
                         class="bg-sky-500 hover:bg-sky-600 pt-1 pb-1.5 mt-1 px-5 rounded-3xl text-white transition ease-in-out delay-75"
                     >
                         <i
+                            :data-test="`order_${order.id}_button_icon`"
                             class="fa-solid fa-1x text-gray-50 mr-0.5 mt-0.5 ml-0"
                             :class="statusElementClasses[nextStatus(order)]['icon']"
                         >
@@ -25,7 +27,7 @@
 
             <div class="flex mb-4 ml-5 mr-8">
                 <div
-                    class="[&:nth-child(1)]:flex-1 [&:nth-child(2)]:flex-1 [&:nth-child(3)]:flex-1"
+                    class="status-block"
                     v-for="status in statuses"
                 >
                     <div class="min-h-6">
@@ -162,5 +164,11 @@
     @keyframes spin {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
+    }
+
+    .status-block:nth-child(1),
+    .status-block:nth-child(2),
+    .status-block:nth-child(3) {
+        flex: 1 1 0;
     }
 </style>
