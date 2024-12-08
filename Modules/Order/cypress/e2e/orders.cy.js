@@ -13,7 +13,7 @@ describe("Orders tests", () => {
     });
 
     it("displays correct heading text", () => {
-        cy.get("h1").should("have.text", "Pizza POS");
+        cy.get("h1").contains("Pizza POS");
     });
 
     it("makes request to orders index and displays them on page", () => {

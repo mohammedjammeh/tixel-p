@@ -134,10 +134,18 @@
                 let updatedOrder = response.order;
                 let updatedOrderIndex = orders.value.findIndex((order) => order.id === updatedOrder.id);
                 orders.value[updatedOrderIndex] = updatedOrder;
+
+                removeError(order);
             })
-            .catch((error) => {
-                failedOrderIds.value.push(order.id);
-            });
+            .catch((error) => failedOrderIds.value.push(order.id));
+    };
+
+    const removeError = (order) => {
+        const orderFailedIndex = failedOrderIds.value.indexOf(order.id);
+
+        if (orderFailedIndex > -1) {
+            failedOrderIds.value.splice(orderFailedIndex, 1);
+        }
     };
 
     const nextStatus = (order) => {
