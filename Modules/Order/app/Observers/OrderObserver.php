@@ -13,10 +13,12 @@ class OrderObserver
      */
     public function updated(Order $order): void
     {
-        if ($order->isClean('status')) return;
+        if ($order->isClean('status')) {
+            return;
+        }
 
         OrderStatusUpdated::dispatch($order->id, ['status' => $order->status->value]);
 
-//        app(MainAppInterface::class)->updateOrder($order->id, ['status' => $order]);
+        //        app(MainAppInterface::class)->updateOrder($order->id, ['status' => $order]);
     }
 }
