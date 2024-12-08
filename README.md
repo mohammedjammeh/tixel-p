@@ -36,7 +36,7 @@ module directory:
 - `./vendor/bin/sail artisan test` : run tests
 - `./vendor/bin/sail artisan test -filter "test_single"` : run single test
 - `./vendor/bin/pint` : clean up back-end code
-- `npx prettier . --write`: clean up front-end code
+- `npx prettier . --write` : clean up front-end code
 
 
 ### Cypress Commands (module directory)
