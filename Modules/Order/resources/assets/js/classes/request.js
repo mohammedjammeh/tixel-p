@@ -23,8 +23,8 @@ export default class Request {
                     resolve(response.data);
                 })
                 .catch((error) => {
-                    this.onFail(error.response.data.errors);
-                    reject(error.response.data.errors);
+                    this.onFail(error.response.data);
+                    reject(error.response.data);
                 });
         });
     }

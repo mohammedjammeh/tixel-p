@@ -1,7 +1,7 @@
 <template>
     <div class="rounded-xl bg-white m-4">
         <div class="mx-4 md:mx-14 py-2.5 border-b border-slate-100 last:border-b-0 last:pb-8" v-for="order in orders">
-            <div class="flex my-4 mx-2.5 min-h-[40px]">
+            <div class="flex mt-4 mb-0 mx-2.5 min-h-[40px]">
                 <div class="flex-1">
                     <p v-text="`Order #${order.id}`" data-test="order_name"></p>
                     <p class="text-gray-600 text-sm" v-text="order.meals_names" data-test="meals_names"></p>
@@ -25,7 +25,11 @@
                 </div>
             </div>
 
-            <div class="flex mb-4 ml-5 mr-8">
+            <div class="mx-2.5 mt-3 mb-4" v-if="failedOrderIds.includes(order.id)">
+                <p class="text-red-800">Sorry, there was an error. Please try again or contact your admin.</p>
+            </div>
+
+            <div class="flex my-4 ml-5 mr-8">
                 <div class="status-block" v-for="status in statuses">
                     <div class="min-h-6">
                         <!--loading-->
@@ -86,9 +90,9 @@
     import ordersCore from "../core/orders.js";
     import request from "../classes/request.js";
 
-    let orders = ref([]);
-    let statuses = ref([]);
-    let statusElementClasses = {
+    const orders = ref([]);
+    const statuses = ref([]);
+    const statusElementClasses = {
         new: {
             check: "ml-3",
             loading: "",
@@ -114,6 +118,8 @@
             icon: "fa-truck-fast",
         },
     };
+    const failedOrderIds = ref([]);
+
 
     onMounted(() => {
         ordersCore.getAll().then((data) => {
@@ -123,11 +129,14 @@
     });
 
     const updateOrder = (order) => {
-        ordersCore.update(order.id, new request({ status: nextStatus(order) })).then((response) => {
-            let updatedOrder = response.order;
-            let updatedOrderIndex = orders.value.findIndex((order) => order.id === updatedOrder.id);
-            orders.value[updatedOrderIndex] = updatedOrder;
-        });
+        ordersCore.update(order.id, new request({ status: nextStatus(order) }))
+            .then((response) => {
+                let updatedOrder = response.order;
+                let updatedOrderIndex = orders.value.findIndex((order) => order.id === updatedOrder.id);
+                orders.value[updatedOrderIndex] = updatedOrder;
+            }).catch((error) => {
+                failedOrderIds.value.push(order.id);
+            });
     };
 
     const nextStatus = (order) => {
@@ -146,7 +155,7 @@
     };
 </script>
 
-<style>
+<style scoped>
     .loader {
         -webkit-animation: spin 2s linear infinite; /* Safari */
         animation: spin 2s linear infinite;
