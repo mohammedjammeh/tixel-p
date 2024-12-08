@@ -4,7 +4,6 @@ namespace Modules\Order\Database\Seeders;
 
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
-use Modules\Order\Models\Meal;
 use Modules\Order\Models\OrderMeal;
 
 class OrderMealSeeder extends Seeder

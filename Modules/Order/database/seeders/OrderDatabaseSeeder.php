@@ -11,10 +11,10 @@ class OrderDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         $this->call([
-             MealSeeder::class,
-             OrderSeeder::class,
-             OrderMealSeeder::class,
-         ]);
+        $this->call([
+            MealSeeder::class,
+            OrderSeeder::class,
+            OrderMealSeeder::class,
+        ]);
     }
 }

@@ -2,15 +2,11 @@
 
 namespace Modules\Order\Tests\Unit;
 
-use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Queue;
 use Modules\Order\Enums\OrderStatus;
 use Modules\Order\Jobs\OrderStatusUpdated;
 use Modules\Order\Models\Order;
-use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 class OrderObserverTest extends TestCase

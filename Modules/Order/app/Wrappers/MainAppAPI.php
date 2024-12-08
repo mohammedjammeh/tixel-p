@@ -13,14 +13,14 @@ class MainAppAPI implements MainAppInterface
 
     public function updateOrder($id, $attributes): JsonResponse
     {
-//        return Http::acceptJson()
-//            ->withHeaders([])
-//            ->withQueryParameters([])
-//            ->timeout(60)
-//            ->patch(
-//                'https://main-app-api.com',
-//                []
-//            );
+        //        return Http::acceptJson()
+        //            ->withHeaders([])
+        //            ->withQueryParameters([])
+        //            ->timeout(60)
+        //            ->patch(
+        //                'https://main-app-api.com',
+        //                []
+        //            );
 
         return response()->json([], Response::HTTP_OK);
     }
