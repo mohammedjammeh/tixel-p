@@ -1,18 +1,26 @@
 # Pizza POS
 
+### Stack:
+- PHP (Laravel)
+- JavScript (Vue.js)
+- CSS (Tailwind)
+- MySQL
+
+
 ### Requirements:
 - Docker
 - Composer
 - PHP
-- SQL
+- MySQL
 
 
 ### Setup Commands:
 After cloning project, run the following commands in
 
-project directory:<br>
+project directory:
+
 - `composer install` : install composer packages
-- `cp .env.example .env` : created env file
+- `cp .env.example .env` : create env file
 - `npm install` : install node packages
 - `./vendor/bin/sail up` : start running docker container
 - `./vendor/bin/sail artisan migrate:fresh --seed` : refresh and seed database
@@ -51,12 +59,10 @@ When an order status gets updated, the `OrderStatusUpdated` gets fired which not
 To test this:
 - Visit [CloudAMPQ](https://customer.cloudamqp.com/login)
 - Create an instance and update your RabbitMQ credentials in the `.env`
-- Whenever an order gets updated on the module, you should see it on your queued messages ready to be processed, example in screenshot.
-
-NB: My initial approach to this was to send a HTTP request to the website's API via `app(MainAppInterface::class)->updateOrder(..))`.
-
-HTTP communication is ideal in some situations but it can at times create dependencies. By using an Event-driven architecture (EDA), 
-we can keep the services will be loosely coupled and retry jobs if they happen to fail.
+- Whenever an order gets updated, you should see it on your queued messages ready to be processed, example in screenshot.
 
 ![readme.png](readme.png)
 
+NB: My initial approach was to send a HTTP request to the website's API via `app(MainAppInterface::class)->updateOrder(..))`.
+HTTP communication is ideal in some situations but it can at times create dependencies. By using an Event-driven architecture (EDA),
+we can keep the services loosely coupled and jobs could be retried if they happen to fail.
