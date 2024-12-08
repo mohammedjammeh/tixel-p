@@ -15,10 +15,6 @@
 
 
 ### Setup Commands:
-After cloning project, run the following commands in
-
-project directory:
-
 - `composer install` : install composer packages
 - `cp .env.example .env` : create env file
 - `npm install` : install node packages
