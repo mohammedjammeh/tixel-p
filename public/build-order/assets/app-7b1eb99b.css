@@ -1,0 +1,1 @@
+.loader{animation:spin 2s linear infinite}@keyframes spin{0%{transform:rotate(0)}to{transform:rotate(360deg)}}.status-block:nth-child(1),.status-block:nth-child(2),.status-block:nth-child(3){flex:1 1 0}

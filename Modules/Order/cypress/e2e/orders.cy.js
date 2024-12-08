@@ -140,7 +140,7 @@ describe('Orders tests', () => {
             .should('not.exist');
     })
 
-    it.only('updates displayed order elements after updating order status', () => {
+    it('updates displayed order elements after updating order status', () => {
         cy.intercept('PUT', '/orders/1', {
             order: {
                 id: 1,
