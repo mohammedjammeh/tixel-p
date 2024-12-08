@@ -27,6 +27,8 @@ project directory:
 - `cd Modules/Order`: change directory to order modules
 
 module directory:
+- `composer install` : install composer packages
+- `npm install` : install node packages
 - `npm run build`
 - `npm run dev`
 
@@ -49,7 +51,7 @@ module directory:
 - `./vendor/bin/sail artisan module:seed Order` : seed order module seeders
 - `./vendor/bin/sail artisan module:migrate-fresh Order --seed`: refresh and seed order module database
 
-The [Laravel Modules package](https://github.com/nWidart/laravel-modules) was used to create this module, [more module commands](https://laravelmodules.com/docs/v11/artisan-commands#module-migrate).
+The [Laravel Modules package](https://github.com/nWidart/laravel-modules) was used to create this module, [more commands](https://laravelmodules.com/docs/v11/artisan-commands#module-migrate).
 
 ###  Jobs (RabbitMQ)
 
