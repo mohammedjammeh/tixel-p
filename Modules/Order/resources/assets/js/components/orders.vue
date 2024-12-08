@@ -20,16 +20,13 @@
                         >
                         </i>
 
-                        {{ (nextStatus(order)) }}
+                        {{ nextStatus(order) }}
                     </button>
                 </div>
             </div>
 
             <div class="flex mb-4 ml-5 mr-8">
-                <div
-                    class="status-block"
-                    v-for="status in statuses"
-                >
+                <div class="status-block" v-for="status in statuses">
                     <div class="min-h-6">
                         <!--loading-->
                         <div
@@ -37,10 +34,9 @@
                             :data-test="`order_${order.id}_${status}_loader`"
                             :class="[
                                 'loader ml-2 w-[18px] h-[18px] border-2 border-[#f3f3f3] border-t-2 border-t-[#3498db] rounded-[50%]',
-                                statusElementClasses[status]['loading']
+                                statusElementClasses[status]['loading'],
                             ]"
-                        >
-                        </div>
+                        ></div>
 
                         <!--or display check(ed)-->
                         <i
@@ -48,8 +44,10 @@
                             :data-test="`order_${order.id}_${status}_check`"
                             class="fa-circle-check"
                             :class="[
-                                isOrderHigher(order.status, status) ? 'text-blue-900 fa-solid' : 'text-gray-200 fa-regular',
-                                statusElementClasses[status]['check']
+                                isOrderHigher(order.status, status)
+                                    ? 'text-blue-900 fa-solid'
+                                    : 'text-gray-200 fa-regular',
+                                statusElementClasses[status]['check'],
                             ]"
                         >
                         </i>
@@ -61,7 +59,7 @@
                         class="mb-2"
                         :class="[
                             isOrderHigher(order.status, status) ? 'text-blue-900' : 'text-gray-200',
-                            statusElementClasses[status]['text']
+                            statusElementClasses[status]['text'],
                         ]"
                     >
                         {{ status }}
@@ -73,7 +71,7 @@
                         class="fa-solid fa-2x text-center"
                         :class="[
                             isOrderHigher(order.status, status) ? 'text-blue-900' : 'text-gray-200',
-                            statusElementClasses[status]['icon']
+                            statusElementClasses[status]['icon'],
                         ]"
                     >
                     </i>
@@ -85,35 +83,35 @@
 
 <script setup>
     import { ref, onMounted } from "vue";
-    import ordersCore from '../core/orders.js';
-    import request from '../classes/request.js';
+    import ordersCore from "../core/orders.js";
+    import request from "../classes/request.js";
 
     let orders = ref([]);
     let statuses = ref([]);
     let statusElementClasses = {
         new: {
-            check: 'ml-3',
-            loading: '',
-            text: 'ml-1',
-            icon: 'fa-cart-shopping',
+            check: "ml-3",
+            loading: "",
+            text: "ml-1",
+            icon: "fa-cart-shopping",
         },
         prepared: {
-            check: 'ml-6',
-            loading: 'ml-5',
-            text: '',
-            icon: 'fa-kitchen-set ml-3.5',
+            check: "ml-6",
+            loading: "ml-5",
+            text: "",
+            icon: "fa-kitchen-set ml-3.5",
         },
         cooked: {
-            check: 'ml-5',
-            loading: 'ml-5',
-            text: 'ml-0.5',
-            icon: 'fa-fire-burner ml-2.5',
+            check: "ml-5",
+            loading: "ml-5",
+            text: "ml-0.5",
+            icon: "fa-fire-burner ml-2.5",
         },
         ready: {
-            check: 'ml-2.5',
-            loading: '',
-            text: '',
-            icon: 'fa-truck-fast',
+            check: "ml-2.5",
+            loading: "",
+            text: "",
+            icon: "fa-truck-fast",
         },
     };
 
@@ -125,28 +123,27 @@
     });
 
     const updateOrder = (order) => {
-        ordersCore.update(order.id, new request({status: nextStatus(order)}))
-            .then((response) => {
-                let updatedOrder = response.order;
-                let updatedOrderIndex = orders.value.findIndex((order) => order.id === updatedOrder.id);
-                orders.value[updatedOrderIndex] = updatedOrder;
-            });
-    }
+        ordersCore.update(order.id, new request({ status: nextStatus(order) })).then((response) => {
+            let updatedOrder = response.order;
+            let updatedOrderIndex = orders.value.findIndex((order) => order.id === updatedOrder.id);
+            orders.value[updatedOrderIndex] = updatedOrder;
+        });
+    };
 
     const nextStatus = (order) => {
         let orderStatusIndex = statuses.value.indexOf(order.status);
 
         return statuses.value[orderStatusIndex + 1];
-    }
+    };
 
-    const isNotReady = (order) => order.status !== 'ready';
+    const isNotReady = (order) => order.status !== "ready";
 
     const isOrderHigher = (orderStatus, elementStatus) => {
         let ordersStatusIndex = statuses.value.indexOf(orderStatus);
         let elementStatusIndex = statuses.value.indexOf(elementStatus);
 
         return ordersStatusIndex >= elementStatusIndex;
-    }
+    };
 </script>
 
 <style>
@@ -157,13 +154,21 @@
 
     /* Safari */
     @-webkit-keyframes spin {
-        0% { -webkit-transform: rotate(0deg); }
-        100% { -webkit-transform: rotate(360deg); }
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
     }
 
     @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
     }
 
     .status-block:nth-child(1),

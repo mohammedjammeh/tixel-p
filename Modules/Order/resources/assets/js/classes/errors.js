@@ -12,7 +12,7 @@ export default class Errors {
     }
 
     get(field) {
-        if(this.errors[field]) {
+        if (this.errors[field]) {
             return this.errors[field][0];
         }
     }
@@ -22,7 +22,7 @@ export default class Errors {
     }
 
     clear(field) {
-        if(field) {
+        if (field) {
             delete this.errors[field];
             return;
         }

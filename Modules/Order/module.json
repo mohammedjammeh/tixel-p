@@ -4,8 +4,6 @@
     "description": "",
     "keywords": [],
     "priority": 0,
-    "providers": [
-        "Modules\\Order\\Providers\\OrderServiceProvider"
-    ],
+    "providers": ["Modules\\Order\\Providers\\OrderServiceProvider"],
     "files": []
 }
