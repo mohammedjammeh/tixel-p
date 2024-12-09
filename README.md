@@ -3,7 +3,7 @@
 ### Stack:
 
 -   PHP (Laravel)
--   JavsScript (Vue.js)
+-   JavaScript (Vue.js)
 -   CSS (Tailwind)
 -   MySQL
 
